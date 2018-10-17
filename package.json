@@ -11,25 +11,24 @@
     "umd"
   ],
   "scripts": {
-    "build": "nwb build-react-component",
-    "clean": "nwb clean-module && nwb clean-demo",
-    "prepublishOnly": "npm run build",
-    "start": "nwb serve-react-demo",
-    "test": "nwb test-react",
-    "test:coverage": "nwb test-react --coverage",
-    "test:watch": "nwb test-react --server"
+    "build": "npx nwb build-react-component",
+    "clean": "npx nwb clean-module && nwb clean-demo",
+    "prepublishOnly": "npx npm run build",
+    "start": "npx nwb serve-react-demo",
+    "test": "npx nwb test-react",
+    "test:coverage": "npx nwb test-react --coverage",
+    "test:watch": "npx nwb test-react --server"
   },
-  "dependencies": {},
   "peerDependencies": {
     "react": "16.x"
   },
   "devDependencies": {
-    "nwb": "0.23.x",
+    "@types/mocha": "^5.2.5",
+    "nwb": "^0.23.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2"
   },
-  "author": "",
-  "homepage": "",
+  "author": "Scott Price",
   "license": "MIT",
   "repository": "",
   "keywords": [

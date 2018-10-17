@@ -1,15 +1,44 @@
-import React, {Component} from 'react'
-import {render} from 'react-dom'
+import React, { Component, Fragment } from 'react';
+import { render } from 'react-dom';
+import Heartbeat from '../../src';
 
-import Example from '../../src'
+export default class Timer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      paused: true,
+      timer: 0
+    };
+  }
 
-class Demo extends Component {
+  count = () => {
+    const timer = this.state.timer;
+    this.setState({
+      timer: timer + 1
+    });
+  };
+
+  handlePause = () => {
+    this.setState({
+      paused: !this.state.paused
+    });
+  };
+
   render() {
-    return <div>
-      <h1>react-heartbeat Demo</h1>
-      <Example/>
-    </div>
+    const heartbeat =
+      this.state.paused === true ? null : (
+        <Heartbeat heartbeatFunction={this.count} heartbeatInterval={50} />
+      );
+    return (
+      <Fragment>
+        {heartbeat}
+        <p>{this.state.timer}</p>
+        <button onClick={this.handlePause}>
+          {this.state.paused === true ? 'Start' : 'Pause'}
+        </button>
+      </Fragment>
+    );
   }
 }
 
-render(<Demo/>, document.querySelector('#demo'))
+render(<Timer />, document.querySelector('#demo'));

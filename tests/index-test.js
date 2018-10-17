@@ -1,23 +1,33 @@
-import expect from 'expect'
-import React from 'react'
-import {render, unmountComponentAtNode} from 'react-dom'
+import expect from 'expect';
+import React from 'react';
+import { render, unmountComponentAtNode } from 'react-dom';
 
-import Component from 'src/'
+import Heartbeat from '../src';
 
-describe('Component', () => {
-  let node
+describe('Heartbeat', () => {
+  // let node;
 
-  beforeEach(() => {
-    node = document.createElement('div')
-  })
+  // beforeEach(() => {
+  //   node = document.createElement('div');
+  // });
 
-  afterEach(() => {
-    unmountComponentAtNode(node)
-  })
+  // afterEach(() => {
+  //   unmountComponentAtNode(node);
+  // });
 
-  it('displays a welcome message', () => {
-    render(<Component/>, node, () => {
-      expect(node.innerHTML).toContain('Welcome to React components')
-    })
-  })
-})
+  // it('calls a function 5 times', function() {
+  //   this.timeout(5010);
+  //   let timesCalled = 0;
+  //   const func = () => timesCalled++;
+  //   render(<Heartbeat heartbeatFunction={func} />, node, () => {
+  //     expect(timesCalled).toEqual(5);
+  //   });
+  // });
+
+  it('disables the button when loading=true', () => {
+    this.timeout(5010);
+    let timesCalled = 0;
+    const func = () => timesCalled++;
+    expect(render(<Heartbeat heartbeatFunction={func} />));
+  });
+});
