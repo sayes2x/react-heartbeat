@@ -4,7 +4,7 @@
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
 
-React Heartbeat is a simple React Componenant that will call a function that you provide at a regular interval. It should stay accurate within a few milliseconds as long as you run it. React Heartbeat will continue to call the function you pass to it as long as it is rendered, to stop it, just stop rendering React Heartbeat.
+React Heartbeat is a simple React Component that will call a function that you provide at a regular interval. It should stay accurate within a few milliseconds as long as you run it. React Heartbeat will continue to call the function you pass to it as long as it is rendered, to stop it, just stop rendering React Heartbeat.
 
 [build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
 [build]: https://travis-ci.org/user/repo
@@ -15,13 +15,13 @@ React Heartbeat is a simple React Componenant that will call a function that you
 
 # Usage
 
-To use React Heartbeat with your componant, first import it:
+To use React Heartbeat with your component, first import it:
 
 ```javascript
 import Heartbeat from 'react-heartbeat';
 ```
 
-Then render it in your componant's render function:
+Then render it in your component’s render function:
 
 ```javascript
 render() {
@@ -41,7 +41,7 @@ heartbeatInterval is optional. If you do not provide this prop the default is 10
 
 There are several ways you can manage starting and stopping React Heartbeat from calling the function you pass to it. Here is one way:
 
-In the state of your componant add a 'paused' property as a boolean.
+In the state of your component add a 'paused' property as a boolean.
 
 ```javascript
 this.state = {
@@ -50,22 +50,26 @@ this.state = {
 };
 ```
 
-Then in the render function set a variable using the ternary operator to 'null' if paused is true, and set it to <Heartbeat /> if paused is false. Then render this variable in your componant like this:
+Then in the render function set a variable using the ternary operator to 'null' if paused is true, and set it to the React Heartbeat component if paused is false. Then render this variable in your component like this:
 
 ```javascript
 render() {
     const heartbeat =
-      this.state.paused === true ? null : (
+        this.state.paused === true ? null : (
         <Heartbeat heartbeatFunction={this.count} heartbeatInterval={50} />
-      );
+        );
     return (
-      <Fragment>
+        <Fragment>
         {heartbeat}
-        <p>{this.state.timer}</p>
-        <button onClick={this.handlePause}>
-          {this.state.paused === true ? 'Start' : 'Pause'}
-        </button>
-      </Fragment>
+        </Fragment>
     );
 }
 ```
+
+For an example of React Heartbeat used in a web app see my [Pomodoro Timer](https://sayes2x-pomodoro-timer.netlify.com/). The source code for this project is [here](https://github.com/sayes2x/pomodoro-clock). Note: this project uses React Heartbeat as a component, not as a npm module. I created React Heartbeat while developing this project, then decided to make it an npm module.
+
+# How it works.
+
+React Heartbeat records the system time when you first call it in state, then it schedules a call to the function you provide as a prop using setTimeout at the interval you specify as a prop. When React Heartbeat calls your function, it compares the system time when it called your function to the time it should have called your function, then adjusts the next call to your function so that it will be called at twice the interval you provided from the time you first rendered React Heartbeat in your component. It continues comparing the time your function was called to the time it should have been called and making adjustments as long as you continue to render React Heartbeat in your component.
+
+The source code for React Heartbeat is [here](https://github.com/sayes2x/react-heartbeat/blob/master/src/index.js).
