@@ -32,6 +32,7 @@
   "license": "MIT",
   "repository": "",
   "keywords": [
-    "react-component"
+    "react-component",
+    "timer"
   ]
 }
